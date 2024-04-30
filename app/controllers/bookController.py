@@ -21,9 +21,6 @@ def view():
     print(the_package_to_be_booked)
     return render_template('booking.html', panel=hotel_name, form=form, package=the_package_to_be_booked)
 
-
-
-
 @booking.route('/book', methods=['GET', 'POST'])
 @login_required
 def book():

@@ -1,5 +1,5 @@
 from flask_login import login_user, login_required, logout_user, current_user
-from flask import Blueprint, request, redirect, render_template, url_for
+from flask import Blueprint, request, redirect, render_template, url_for, escape
 
 from app.models.forms import BookForm
 
@@ -24,7 +24,8 @@ def viewPackageDetail(hotel_name):
 @package.route('/redirect')
 def query_example():
     # Access the query parameter 'query' from the request
-    query_param = request.args.get('query')
+    #query_param = request.args.get('query')
+    query_param = escape(request.args.get('query'))
     
     # Process the query parameter (e.g., perform validation, sanitize, etc.)
     # In this example, we'll simply return the query parameter value
@@ -42,7 +43,8 @@ def create_staycation():
         duration = int(request.form.get('duration'))
         unit_cost = float(request.form.get('unit_cost'))
         image_url = request.form.get('image_url')
-        description = request.form.get('description')
+        #description = request.form.get('description')
+        description = escape(request.form.get('description'))
 
         # Create a new Staycation document
         Package.createPackage(hotel_name=hotel_name, duration=duration,
